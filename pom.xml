@@ -128,6 +128,8 @@ Copyright 2014-2016 CyberVision, Inc.
         <jetty.version>9.2.2.v20140723</jetty.version>
         <kafka.clients.version>0.8.2.0</kafka.clients.version>
         <guava-gwt.version>18.0</guava-gwt.version>
+        <paho.client.mqttv3.version>1.0.2</paho.client.mqttv3.version>
+
     </properties>
 
     <modules>
@@ -1318,6 +1320,11 @@ Copyright 2014-2016 CyberVision, Inc.
                 <groupId>oauth.signpost</groupId>
                 <artifactId>signpost-core</artifactId>
                 <version>${signpost-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.paho</groupId>
+                <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+                <version>${paho.client.mqttv3.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
