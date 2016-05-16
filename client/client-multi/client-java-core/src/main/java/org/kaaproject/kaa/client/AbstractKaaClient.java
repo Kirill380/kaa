@@ -48,6 +48,7 @@ import org.kaaproject.kaa.client.channel.impl.DefaultChannelManager;
 import org.kaaproject.kaa.client.channel.failover.DefaultFailoverManager;
 import org.kaaproject.kaa.client.channel.impl.DefaultOperationDataProcessor;
 import org.kaaproject.kaa.client.channel.impl.channels.DefaultBootstrapChannel;
+import org.kaaproject.kaa.client.channel.impl.channels.DefaultOperationMqttChannel;
 import org.kaaproject.kaa.client.channel.impl.channels.DefaultOperationTcpChannel;
 import org.kaaproject.kaa.client.channel.impl.transports.DefaultBootstrapTransport;
 import org.kaaproject.kaa.client.channel.impl.transports.DefaultConfigurationTransport;
@@ -637,10 +638,15 @@ public abstract class AbstractKaaClient implements GenericKaaClient {
         bootstrapChannel.setDemultiplexer(bootstrapDataProcessor);
         channelManager.addChannel(bootstrapChannel);
 
-        KaaDataChannel operationsChannel = new DefaultOperationTcpChannel(kaaClientState, failoverManager, failureListener);
-        operationsChannel.setMultiplexer(operationsDataProcessor);
-        operationsChannel.setDemultiplexer(operationsDataProcessor);
-        channelManager.addChannel(operationsChannel);
+//        KaaDataChannel operationsChannel = new DefaultOperationTcpChannel(kaaClientState, failoverManager, failureListener);
+//        operationsChannel.setMultiplexer(operationsDataProcessor);
+//        operationsChannel.setDemultiplexer(operationsDataProcessor);
+//        channelManager.addChannel(operationsChannel);
+
+        KaaDataChannel operationsMqttChannel = new DefaultOperationMqttChannel(kaaClientState, failoverManager, failureListener);
+        operationsMqttChannel.setMultiplexer(operationsDataProcessor);
+        operationsMqttChannel.setDemultiplexer(operationsDataProcessor);
+        channelManager.addChannel(operationsMqttChannel);
     }
 
     protected FailoverManager buildFailoverManager(KaaChannelManager channelManager) {
